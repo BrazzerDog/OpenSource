@@ -3,12 +3,14 @@ FROM node:16-alpine as build
 
 WORKDIR /app
 
-# Устанавливаем зависимости
+# Копируем package.json и устанавливаем зависимости
 COPY package*.json ./
 RUN npm install
 
-# Копируем исходники и собираем
+# Копируем исходники
 COPY . .
+
+# Собираем приложение
 RUN npm run build
 
 # Production stage
