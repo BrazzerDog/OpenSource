@@ -87,6 +87,17 @@ interface OrderItem {
   total: number;
 }
 
+// Добавляем типы для таблицы
+type TableRecord = {
+  id: number;
+  date: string;
+  delivery_date: string;
+  contractor: {
+    name: string;
+  };
+  is_delivered: boolean;
+};
+
 const disabledDate: RangePickerProps['disabledDate'] = (current) => {
   return current && current > moment().endOf('day');
 };
@@ -135,9 +146,8 @@ const OrderList: React.FC = () => {
     },
     {
       title: 'Действия',
-      key: 'actions',
-      className: 'actions-column',
-      render: (_: any, record: Order) => (
+      key: 'action',
+      render: (_: any, record: TableRecord, index: number) => (
         <Space>
           <Button 
             type="link" 
