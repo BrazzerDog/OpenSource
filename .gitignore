@@ -3,8 +3,7 @@ node_modules/
 __pycache__/
 *.pyc
 
-# Environment
-.env
+# Virtual environment
 venv/
 .venv/
 
