@@ -1,0 +1,29 @@
+echo "# Dependencies
+node_modules/
+__pycache__/
+*.pyc
+
+# Environment
+.env
+venv/
+.venv/
+
+# Build
+frontend/build/
+frontend/dist/
+
+# IDE
+.idea/
+.vscode/
+
+# Logs
+*.log
+npm-debug.log*
+
+# Database
+*.db
+*.sqlite3
+
+# OS
+.DS_Store
+Thumbs.db" > .gitignore

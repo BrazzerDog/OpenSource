@@ -1,0 +1,85 @@
+# Orders API Documentation
+
+## Аутентификация
+Все запросы (кроме регистрации и логина) требуют заголовок Authorization: Bearer <token>
+
+### Auth Endpoints
+
+POST /api/register
+- Регистрация нового пользователя
+- Body: { email, first_name, last_name, password }
+- Returns: User object
+
+POST /api/token
+- Получение JWT токена
+- Body: { username (email), password }
+- Returns: { access_token, token_type }
+
+POST /api/activate/{token}
+- Активация аккаунта
+- Returns: { message }
+
+POST /api/reset-password
+- Запрос на сброс пароля
+- Body: { email }
+- Returns: { message }
+
+### Orders Endpoints
+
+GET /api/orders
+- Получение списка заказов
+- Query params: 
+  - skip: int
+  - limit: int
+  - date_from: YYYY-MM-DD
+  - date_to: YYYY-MM-DD
+  - is_delivered: boolean
+- Returns: Array of Order objects
+
+POST /api/orders
+- Создание заказа
+- Body: { delivery_date, contractor_id, items: Array }
+- Returns: Order object
+
+PUT /api/orders/{order_id}
+- Обновление заказа
+- Body: { delivery_date, contractor_id, items: Array }
+- Returns: Order object
+
+DELETE /api/orders/{order_id}
+- Удаление заказа
+- Returns: { message }
+
+GET /api/orders/{order_id}/pdf
+- Получение PDF версии заказа
+- Returns: PDF file
+
+## Модели данных
+
+User {
+  id: int
+  email: string
+  first_name: string
+  last_name: string
+  is_admin: boolean
+  is_active: boolean
+}
+
+Order {
+  id: int
+  date: datetime
+  delivery_date: date
+  is_delivered: boolean
+  contractor_id: int
+  user_id: int
+  items: Array<OrderItem>
+}
+
+OrderItem {
+  id: int
+  order_id: int
+  name: string
+  quantity: int
+  price: decimal
+  total: decimal
+} 
